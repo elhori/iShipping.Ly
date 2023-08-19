@@ -5,6 +5,8 @@ VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iShipping.Ly", "iShipping.Ly\iShipping.Ly.csproj", "{6B317137-9C3C-4C94-B3F6-9648C8A8C396}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iShipping.Ly.Test", "iShipping.Ly.Test\iShipping.Ly.Test.csproj", "{65E6F502-1283-42EF-B524-E1D6AA3581B0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{6B317137-9C3C-4C94-B3F6-9648C8A8C396}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6B317137-9C3C-4C94-B3F6-9648C8A8C396}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6B317137-9C3C-4C94-B3F6-9648C8A8C396}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65E6F502-1283-42EF-B524-E1D6AA3581B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65E6F502-1283-42EF-B524-E1D6AA3581B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65E6F502-1283-42EF-B524-E1D6AA3581B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65E6F502-1283-42EF-B524-E1D6AA3581B0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
