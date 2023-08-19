@@ -19,4 +19,8 @@
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.32.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\iShipping.Ly.Application\iShipping.Ly.Application.csproj" />
+  </ItemGroup>
+
 </Project>

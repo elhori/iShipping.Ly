@@ -14,4 +14,9 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\iShipping.Ly.Application\iShipping.Ly.Application.csproj" />
+    <ProjectReference Include="..\iShipping.Ly.Infra\iShipping.Ly.Infra.csproj" />
+  </ItemGroup>
+
 </Project>

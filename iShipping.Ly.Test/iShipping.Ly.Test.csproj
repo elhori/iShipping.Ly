@@ -25,4 +25,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\src\iShipping.Ly.API\iShipping.Ly.API.csproj" />
+    <ProjectReference Include="..\src\iShipping.Ly.Application\iShipping.Ly.Application.csproj" />
+  </ItemGroup>
+
 </Project>
