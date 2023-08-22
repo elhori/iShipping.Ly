@@ -10,8 +10,8 @@ namespace iShipping.Ly.Application.Contracts.Repositories
         Task<Result> RemoveUserAsync(string userId);
         Task<Response<GetUsersResponse>> GetUsersAsync(GetUsersRequest request);
         Task<GetUsersResponse> GetUserAsync(string userId);
-        Task<Result> UpdateUserProfileAsync(UpdateUserProfileRequest request, string userId);
-        Task<Result> ChangePasswordAsync(ChangePasswordRequest request, string userId);
-        Task<Response<GetUsersResponse>> SearchAsync(string query);
+        Task<Result> UpdateUserProfileAsync(UpdateUserProfileRequest request);
+        Task<Result> ChangePasswordAsync(ChangePasswordRequest request);
+        Task<Response<GetUsersResponse>> SearchAsync(SearchUsersRequest request);
     }
 }

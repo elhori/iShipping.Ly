@@ -1,9 +1,13 @@
-﻿using System.Text.Json.Serialization;
+﻿using MediatR;
+using System.Text.Json.Serialization;
 
 namespace iShipping.Ly.Application.Dtos.Identity
 {
-    public class UpdateUserProfileRequest
+    public class UpdateUserProfileRequest : IRequest<Result>
     {
+        [JsonIgnore]
+        public string Id { get; set; } = string.Empty;
+
         public string? UserName { get; set; } = string.Empty;
 
         public string? Email { get; set; } = string.Empty;

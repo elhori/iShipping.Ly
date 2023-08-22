@@ -1,8 +1,9 @@
-﻿using System.Text.Json.Serialization;
+﻿using MediatR;
+using System.Text.Json.Serialization;
 
 namespace iShipping.Ly.Application.Dtos.Identity
 {
-    public class RegisterRequest
+    public class RegisterRequest : IRequest<Result>
     {
         public string UserName { get; set; } = string.Empty;
 

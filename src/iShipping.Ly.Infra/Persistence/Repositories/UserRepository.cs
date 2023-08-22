@@ -62,9 +62,9 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             return (IdentityResult.Failed().ToApplicationResult(), null!);
         }
 
-        public async Task<Result> ChangePasswordAsync(ChangePasswordRequest request, string userId)
+        public async Task<Result> ChangePasswordAsync(ChangePasswordRequest request)
         {
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(request.Id);
 
             if (user is null)
             {
@@ -176,15 +176,20 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             return IdentityResult.Success.ToApplicationResult();
         }
 
-        public async Task<Response<GetUsersResponse>> SearchAsync(string query)
+        public async Task<Response<GetUsersResponse>> SearchAsync(SearchUsersRequest request)
         {
-            var upperQuery = query.ToUpper();
+            var upperQuery = request.Query.ToUpper();
+
+            var skip = request.PageSize * (request.CurrentPage - 1);
 
             var data = await _userManager.Users
                 .Where(u => EF.Functions.Like(u.Email.ToUpper(), $"%{upperQuery}%") ||
                             EF.Functions.Like(u.UserName.ToUpper(), $"%{upperQuery}%") ||
                             EF.Functions.Like(u.PhoneNumber.ToUpper(), $"%{upperQuery}%") ||
                             EF.Functions.Like((u.FirstName + " " + u.LastName).ToUpper(), $"%{upperQuery}%"))
+                .OrderBy(i => i.Id)
+                .Skip(skip)
+                .Take(request.PageSize)
                 .Select(r => new GetUsersResponse
                 {
                     Id = r.Id,
@@ -197,14 +202,16 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
 
             return new Response<GetUsersResponse>
             {
+                CurrentPage = request.CurrentPage,
+                PageSize = request.PageSize,
                 TotalResults = data.Count,
                 Results = data
             };
         }
 
-        public async Task<Result> UpdateUserProfileAsync(UpdateUserProfileRequest request, string userId)
+        public async Task<Result> UpdateUserProfileAsync(UpdateUserProfileRequest request)
         {
-            var user = await _userManager.FindByIdAsync(userId)
+            var user = await _userManager.FindByIdAsync(request.Id)
                 ?? throw new AppException(ExceptionStatusCode.NotFound, ExceptionMessages.UserNotFound);
 
             user.UpdateProfile(request);

@@ -1,6 +1,8 @@
-﻿namespace iShipping.Ly.Application.Dtos.Identity
+﻿using MediatR;
+
+namespace iShipping.Ly.Application.Dtos.Identity
 {
-    public record GetUsersRequest(int CurrentPage = 1, int PageSize = 25);
+    public record GetUsersRequest(int CurrentPage = 1, int PageSize = 25) : IRequest<Response<GetUsersResponse>>;
 
     public class GetUsersResponse
     {
