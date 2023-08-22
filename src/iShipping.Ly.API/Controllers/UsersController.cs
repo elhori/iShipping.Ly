@@ -1,4 +1,5 @@
-﻿using iShipping.Ly.Application.Dtos;
+﻿using iShipping.Ly.Application.Constants;
+using iShipping.Ly.Application.Dtos;
 using iShipping.Ly.Application.Dtos.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
@@ -29,7 +30,23 @@ namespace iShipping.Ly.API.Controllers
 
         [HttpPost]
         [Route("RegisterAccount")]
-        public async Task<IActionResult> Register([FromForm] RegisterRequest request)
+        [AllowAnonymous]
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        {
+            var result = await _mediator.Send(request);
+
+            if (result.Succeeded)
+            {
+                return Ok($"تمت اضافة {request.FirstName} {request.LastName} بنجاح");
+            }
+
+            return BadRequest(result.Errors);
+        }
+
+        [HttpPost]
+        [Route("RegisterAdminAccount")]
+        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        public async Task<IActionResult> RegisterAdmin([FromBody] CreateAdminRequest request)
         {
             var result = await _mediator.Send(request);
 
@@ -42,9 +59,16 @@ namespace iShipping.Ly.API.Controllers
         }
 
         [HttpPut("UpdateUserProfile")]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileRequest request)
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileRequest request, [FromQuery] string? userId)
         {
-            request.Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            if (User.IsInRole(nameof(Roles.SuperAdmin)))
+            {
+                request.Id = userId!;
+            }
+            else
+            {
+                request.Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            }
 
             if (request.Id == null)
             {
@@ -63,6 +87,7 @@ namespace iShipping.Ly.API.Controllers
 
         [HttpPost]
         [Route("RemoveAccount")]
+        [Authorize(Roles = nameof(Roles.SuperAdmin))]
         public async Task<IActionResult> Remove([FromBody] DeleteUserRequest request)
         {
             var result = await _mediator.Send(request);
@@ -74,21 +99,31 @@ namespace iShipping.Ly.API.Controllers
         }
 
         [HttpGet("GetUser/{userId}")]
+        [Authorize(Roles = nameof(Roles.SuperAdmin))]
         public async Task<ActionResult<GetUsersResponse>> GetUser(string userId)
             => Ok(await _mediator.Send(new GetUserRequest(userId: userId)));
 
         [HttpGet("GetUsers")]
+        [Authorize(Roles = nameof(Roles.SuperAdmin))]
         public async Task<ActionResult<Response<GetUsersResponse>>> GetUsers([FromQuery] GetUsersRequest request)
             => Ok(await _mediator.Send(request));
 
         [HttpGet("SearchUsers")]
+        [Authorize(Roles = nameof(Roles.SuperAdmin))]
         public async Task<ActionResult<Response<GetUsersResponse>>> SearchUsers([FromQuery] SearchUsersRequest request)
             => Ok(await _mediator.Send(request));
 
         [HttpPost("ChangePassword")]
-        public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordRequest request)
+        public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordRequest request, [FromQuery] string? userId)
         {
-            request.Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            if (User.IsInRole(nameof(Roles.SuperAdmin)))
+            {
+                request.Id = userId!;
+            }
+            else
+            {
+                request.Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+            }
 
             if (request.Id == null)
             {
@@ -100,6 +135,20 @@ namespace iShipping.Ly.API.Controllers
             if (result.Succeeded)
             {
                 return Ok("تم تغيير كلمة المرور بنجاح");
+            }
+
+            return BadRequest(result.Errors);
+        }
+
+        [HttpPost("ResetPassword")]
+        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        {
+            var result = await _mediator.Send(request);
+
+            if (result.Succeeded)
+            {
+                return Ok("تمت تغيير كلمة المرور بنجاح");
             }
 
             return BadRequest(result.Errors);

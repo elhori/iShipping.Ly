@@ -15,6 +15,6 @@ namespace iShipping.Ly.Application.Handlers.Users
         }
 
         public async Task<Response<GetUsersResponse>> Handle(SearchUsersRequest request, CancellationToken cancellationToken)
-            => await _unitOfWork.Users.SearchAsync(request);
+            => await _unitOfWork.Users.SearchAsync(request, cancellationToken);
     }
 }

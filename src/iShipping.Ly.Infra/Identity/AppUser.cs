@@ -19,6 +19,18 @@ namespace iShipping.Ly.Infra.Identity
             SecurityStamp = Guid.NewGuid().ToString();
         }
 
+        public AppUser(CreateAdminRequest request)
+        {
+            UserName = request.UserName;
+            Email = request.Email;
+            PhoneNumber = request.PhoneNumber;
+            FirstName = request.FirstName;
+            LastName = request.LastName;
+            IdentificationCardNumber = request.IdentificationCardNumber!;
+            EmailConfirmed = true;
+            SecurityStamp = Guid.NewGuid().ToString();
+        }
+
         public string FirstName { get; private set; } = string.Empty;
 
         public string LastName { get; private set; } = string.Empty;

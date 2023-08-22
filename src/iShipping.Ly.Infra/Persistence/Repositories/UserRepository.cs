@@ -1,4 +1,5 @@
-﻿using iShipping.Ly.Application.Contracts.Repositories;
+﻿using iShipping.Ly.Application.Constants;
+using iShipping.Ly.Application.Contracts.Repositories;
 using iShipping.Ly.Application.Dtos;
 using iShipping.Ly.Application.Dtos.Identity;
 using iShipping.Ly.Application.Resources;
@@ -27,9 +28,9 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             _context = context;
         }
 
-        public async Task<(Result, object)> AuthenticateAsync(LoginRequest model)
+        public async Task<(Result, object)> AuthenticateAsync(LoginRequest model, CancellationToken cancellationToken = default)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.PhoneNumber == model.PhoneNumber);
+            var user = await _userManager.Users.FirstAsync(u => u.PhoneNumber == model.PhoneNumber, cancellationToken);
 
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
@@ -83,9 +84,31 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             return IdentityResult.Success.ToApplicationResult();
         }
 
-        public async Task<GetUsersResponse> GetUserAsync(string userId)
+        public async Task<Result> CreateAdminAsync(CreateAdminRequest request)
         {
-            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId);
+            var userExists = await _userManager.FindByNameAsync(request.UserName);
+
+            if (userExists != null)
+                throw new AppException(ExceptionStatusCode.AlreadyExists, ExceptionMessages.UserAlreadyExist);
+
+            AppUser user = new AppUser(request);
+
+            var result = await _userManager.CreateAsync(user, request.Password);
+
+            if (!result.Succeeded)
+                return IdentityResult.Failed().ToApplicationResult();
+
+            var roleResult = await _userManager.AddToRoleAsync(user, request.Role.ToString());
+
+            if (!roleResult.Succeeded)
+                return IdentityResult.Failed().ToApplicationResult();
+
+            return IdentityResult.Success.ToApplicationResult();
+        }
+
+        public async Task<GetUsersResponse> GetUserAsync(string userId, CancellationToken cancellationToken = default)
+        {
+            var user = await _userManager.Users.FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
 
             if (user == null)
             {
@@ -107,9 +130,9 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             return response;
         }
 
-        public async Task<Response<GetUsersResponse>> GetUsersAsync(GetUsersRequest request)
+        public async Task<Response<GetUsersResponse>> GetUsersAsync(GetUsersRequest request, CancellationToken cancellationToken = default)
         {
-            if (await _userManager.Users.AsNoTracking().CountAsync() == 0)
+            if (await _userManager.Users.AsNoTracking().CountAsync(cancellationToken) == 0)
             {
                 throw new AppException(ExceptionStatusCode.NotFound, ExceptionMessages.EmptyUsersResponse);
             }
@@ -128,7 +151,7 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
                     FirstName = i.FirstName,
                     LastName = i.LastName,
                     IdentificationCardNumber = i.IdentificationCardNumber!
-                }).ToListAsync();
+                }).ToListAsync(cancellationToken);
 
             return new Response<GetUsersResponse>
             {
@@ -168,6 +191,13 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             if (user == null)
                 throw new AppException(ExceptionStatusCode.NotFound, ExceptionMessages.UserNotFound);
 
+            var userRoles = await _userManager.GetRolesAsync(user);
+
+            if (userRoles.Contains(nameof(Roles.SuperAdmin)))
+            {
+                return IdentityResult.Failed().ToApplicationResult();
+            }
+
             var result = await _userManager.DeleteAsync(user);
 
             if (!result.Succeeded)
@@ -176,7 +206,30 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             return IdentityResult.Success.ToApplicationResult();
         }
 
-        public async Task<Response<GetUsersResponse>> SearchAsync(SearchUsersRequest request)
+        public async Task<Result> ResetPasswordAsync(ResetPasswordRequest request)
+        {
+            var user = await _userManager.FindByIdAsync(request.Id);
+
+            if (user is null)
+            {
+                return IdentityResult.Failed().ToApplicationResult();
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await _userManager.ResetPasswordAsync(user, token, request.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                var errors = string.Join(", ", result.Errors.Select(e => e.Description));
+                //TODO: send errors to client
+                return IdentityResult.Failed().ToApplicationResult();
+            }
+
+            return IdentityResult.Success.ToApplicationResult();
+        }
+
+        public async Task<Response<GetUsersResponse>> SearchAsync(SearchUsersRequest request, CancellationToken cancellationToken = default)
         {
             var upperQuery = request.Query.ToUpper();
 
@@ -198,7 +251,7 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
                     FirstName = r.FirstName,
                     LastName = r.LastName,
                     IdentificationCardNumber = r.IdentificationCardNumber!
-                }).ToListAsync();
+                }).ToListAsync(cancellationToken);
 
             return new Response<GetUsersResponse>
             {
