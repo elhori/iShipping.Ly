@@ -1,5 +1,5 @@
 ﻿using iShipping.Ly.Application.Dtos;
-using iShipping.Ly.Application.Dtos.Address;
+using iShipping.Ly.Application.Dtos.Country;
 using iShipping.Ly.Application.Resources;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -8,44 +8,44 @@ namespace iShipping.Ly.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressesController : ControllerBase
+    public class CountriesController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public AddressesController(IMediator mediator)
+        public CountriesController(IMediator mediator)
         {
             _mediator = mediator;
         }
 
         [HttpGet]
-        public async Task<ActionResult<Response<GetAddressesResponse>>> GetAsync([FromQuery] GetAddressesRequest request)
+        public async Task<ActionResult<Response<GetCountriesResponse>>> GetAsync([FromQuery] GetCountriesRequest request)
             => await _mediator.Send(request);
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<GetAddressesResponse>> GetAsync(int id)
-            => await _mediator.Send(new GetAddressRequest(Id: id));
+        public async Task<ActionResult<GetCountriesResponse>> GetAsync(int id)
+            => await _mediator.Send(new GetCountryRequest(id));
 
         [HttpPost]
-        public async Task<ActionResult<GetAddressesResponse>> PostAsync([FromBody] CreateAddressRequest request)
+        public async Task<ActionResult<GetCountriesResponse>> PostAsync([FromBody] CreateCountryRequest request)
         {
             var result = await _mediator.Send(request);
 
             if (result == null)
             {
-                return Problem(ExceptionMessages.AddressAlreadyExist);
+                return Problem(ExceptionMessages.CountryAlreadyExist);
             }
 
             return Ok(result);
         }
 
         [HttpPut]
-        public async Task<ActionResult<GetAddressesResponse>> PutAsync([FromBody] UpdateAddressRequest request)
+        public async Task<ActionResult<GetCountriesResponse>> PutAsync([FromBody] UpdateCountryRequest request)
         {
             var result = await _mediator.Send(request);
 
             if (result == null)
             {
-                return Problem(ExceptionMessages.AddressNotFound);
+                return Problem(ExceptionMessages.CountryNotFound);
             }
 
             return Ok(result);
@@ -54,10 +54,10 @@ namespace iShipping.Ly.API.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult> DeleteAsync(int id)
         {
-            var result = await _mediator.Send(new DeleteAddressRequest(Id: id));
+            var result = await _mediator.Send(new DeleteCountryRequest(id));
 
             if (!result)
-                return Problem(ExceptionMessages.AddressNotFound);
+                return Problem(ExceptionMessages.CountryNotFound);
 
             return Ok();
         }

@@ -97,6 +97,24 @@ namespace iShipping.Ly.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الدولة موجودة بالفعل.
+        /// </summary>
+        public static string CountryAlreadyExist {
+            get {
+                return ResourceManager.GetString("CountryAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الدولة غير موجودة.
+        /// </summary>
+        public static string CountryNotFound {
+            get {
+                return ResourceManager.GetString("CountryNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to لا يوجد مستخدمين.
         /// </summary>
         public static string EmptyUsersResponse {

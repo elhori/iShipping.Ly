@@ -10,6 +10,8 @@
 
         IStateRepository States { get; }
 
+        ICountryRepository Countries { get; }
+
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
 
         Task BeginTransactionAsync();

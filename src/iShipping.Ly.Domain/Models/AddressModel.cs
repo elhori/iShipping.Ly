@@ -8,5 +8,6 @@
         string AddressLineTwo,
         string ZipCode,
         string Phone,
-        int CityId);
+        int CityId,
+        int CountryId);
 }

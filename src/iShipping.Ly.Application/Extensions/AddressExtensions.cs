@@ -16,7 +16,8 @@ namespace iShipping.Ly.Application.Extensions
                 AddressLineTwo: request.AddressLineTwo,
                 ZipCode: request.ZipCode,
                 Phone: request.Phone,
-                CityId: request.CityId);
+                CityId: request.CityId,
+                CountryId: request.CountryId);
         }
 
         public static AddressModel ToModel(this UpdateAddressRequest request)
@@ -29,7 +30,8 @@ namespace iShipping.Ly.Application.Extensions
                 AddressLineTwo: request.AddressLineTwo,
                 ZipCode: request.ZipCode,
                 Phone: request.Phone,
-                CityId: request.CityId);
+                CityId: request.CityId,
+                CountryId: request.CountryId);
         }
 
         public static GetAddressesResponse ToResponse(this Address address)

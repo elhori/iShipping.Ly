@@ -15,6 +15,7 @@ namespace iShipping.Ly.Domain.Entities
             ZipCode = model.ZipCode;
             Phone = model.Phone;
             CityId = model.CityId;
+            CountryId = model.CountryId;
         }
 
         public int Id { get; private set; }
@@ -34,6 +35,9 @@ namespace iShipping.Ly.Domain.Entities
         public int CityId { get; private set; }
         public City City { get; private set; } = null!;
 
+        public int CountryId { get; private set; }
+        public Country Country { get; private set; } = null!;
+
         public void Update(AddressModel model)
         {
             FirstName = model.FirstName;
@@ -43,6 +47,7 @@ namespace iShipping.Ly.Domain.Entities
             ZipCode = model.ZipCode;
             Phone = model.Phone;
             CityId = model.CityId;
+            CountryId = model.CountryId;
         }
     }
 }

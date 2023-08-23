@@ -9,5 +9,6 @@ namespace iShipping.Ly.Application.Dtos.Address
                                    string AddressLineTwo,
                                    string ZipCode,
                                    string Phone,
-                                   int CityId) : IRequest<GetAddressesResponse>;
+                                   int CityId,
+                                   int CountryId) : IRequest<GetAddressesResponse>;
 }

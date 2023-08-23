@@ -30,6 +30,18 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             }
         }
 
+        private ICountryRepository _countries;
+        public ICountryRepository Countries
+        {
+            get
+            {
+                if (_countries != null)
+                    return _countries;
+
+                return _countries = new CountryRepository(_context);
+            }
+        }
+
         private IAddressRepository _addresses;
         public IAddressRepository Addresses
         {

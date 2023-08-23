@@ -9,6 +9,7 @@ namespace iShipping.Ly.Infra.Persistence
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
+        public DbSet<Country> Countries { get; set; } = null!;
         public DbSet<Address> Addresses { get; set; } = null!;
         public DbSet<City> Cities { get; set; } = null!;
         public DbSet<State> States { get; set; } = null!;

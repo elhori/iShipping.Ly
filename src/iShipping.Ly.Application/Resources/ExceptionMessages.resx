@@ -129,6 +129,12 @@
   <data name="CityNotFound" xml:space="preserve">
     <value>المدينة غير موجودة</value>
   </data>
+  <data name="CountryAlreadyExist" xml:space="preserve">
+    <value>الدولة موجودة بالفعل</value>
+  </data>
+  <data name="CountryNotFound" xml:space="preserve">
+    <value>الدولة غير موجودة</value>
+  </data>
   <data name="EmptyUsersResponse" xml:space="preserve">
     <value>لا يوجد مستخدمين</value>
   </data>
