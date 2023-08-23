@@ -61,21 +61,31 @@ namespace iShipping.Ly.API.Controllers
         [HttpPut("UpdateUserProfile")]
         public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileRequest request, [FromQuery] string? userId)
         {
+            string id = string.Empty;
+
             if (User.IsInRole(nameof(Roles.SuperAdmin)))
             {
-                request.Id = userId!;
+                id = userId!;
             }
             else
             {
-                request.Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+                id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             }
 
-            if (request.Id == null)
+            if (id == null)
             {
                 return Problem("المستخدم غير موجود");
             }
 
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(new UpdateUserProfileRequest
+                (Id: id,
+                UserName: request.UserName,
+                Email: request.Email,
+                PhoneNumber: request.PhoneNumber,
+                FirstName: request.FirstName,
+                LastName: request.LastName,
+                IdentificationCardNumber: request.IdentificationCardNumber,
+                ProfilePicture: request.ProfilePicture));
 
             if (result.Succeeded)
             {
@@ -116,21 +126,27 @@ namespace iShipping.Ly.API.Controllers
         [HttpPost("ChangePassword")]
         public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordRequest request, [FromQuery] string? userId)
         {
+            string id = string.Empty;
+
             if (User.IsInRole(nameof(Roles.SuperAdmin)))
             {
-                request.Id = userId!;
+                id = userId!;
             }
             else
             {
-                request.Id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
+                id = User.FindFirst(ClaimTypes.NameIdentifier)!.Value;
             }
 
-            if (request.Id == null)
+            if (id == null)
             {
                 return Problem("المستخدم غير موجود");
             }
 
-            var result = await _mediator.Send(request);
+            var result = await _mediator.Send(new ChangePasswordRequest(
+                Id: id,
+                OldPassword: request.OldPassword,
+                NewPassword: request.NewPassword,
+                ConfirmPassword: request.NewPassword));
 
             if (result.Succeeded)
             {

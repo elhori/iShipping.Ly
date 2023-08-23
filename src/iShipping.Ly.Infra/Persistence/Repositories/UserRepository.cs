@@ -15,17 +15,15 @@ using System.Text;
 
 namespace iShipping.Ly.Infra.Persistence.Repositories
 {
-    public class UserRepository : AsyncRepository<AppUser>, IUserRepository
+    public class UserRepository : IUserRepository
     {
         private readonly UserManager<AppUser> _userManager;
         private readonly IConfiguration _config;
-        private readonly DataContext _context;
 
-        public UserRepository(UserManager<AppUser> userManager, IConfiguration config, DataContext context) : base(context)
+        public UserRepository(UserManager<AppUser> userManager, IConfiguration config)
         {
             _config = config;
             _userManager = userManager;
-            _context = context;
         }
 
         public async Task<(Result, object)> AuthenticateAsync(LoginRequest model, CancellationToken cancellationToken = default)

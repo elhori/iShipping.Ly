@@ -20,7 +20,7 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
         {
             await _context.Set<TDomain>().AddRangeAsync(entities, cancellationToken);
         }
-        public virtual async Task<TDomain> GetAsync(Guid id, CancellationToken cancellationToken = default)
+        public virtual async Task<TDomain> GetAsync(int id, CancellationToken cancellationToken = default)
         {
             return await _context.Set<TDomain>().FindAsync(id) ?? default!;
         }

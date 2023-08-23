@@ -1,4 +1,5 @@
-﻿using iShipping.Ly.Infra.Identity;
+﻿using iShipping.Ly.Domain.Entities;
+using iShipping.Ly.Infra.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,6 +8,10 @@ namespace iShipping.Ly.Infra.Persistence
     public class DataContext : IdentityDbContext<AppUser>
     {
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
+
+        public DbSet<Address> Addresses { get; set; } = null!;
+        public DbSet<City> Cities { get; set; } = null!;
+        public DbSet<State> States { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

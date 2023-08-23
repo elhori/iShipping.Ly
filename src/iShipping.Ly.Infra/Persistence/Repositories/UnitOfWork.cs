@@ -26,7 +26,43 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
                 if (_users != null)
                     return _users;
 
-                return _users = new UserRepository(_userManager, _config, _context);
+                return _users = new UserRepository(_userManager, _config);
+            }
+        }
+
+        private IAddressRepository _addresses;
+        public IAddressRepository Addresses
+        {
+            get
+            {
+                if (_addresses != null)
+                    return _addresses;
+
+                return _addresses = new AddressRepository(_context);
+            }
+        }
+
+        private ICityRepository _cities;
+        public ICityRepository Cities
+        {
+            get
+            {
+                if (_cities != null)
+                    return _cities;
+
+                return _cities = new CityRepository(_context);
+            }
+        }
+
+        private IStateRepository _states;
+        public IStateRepository States
+        {
+            get
+            {
+                if (_states != null)
+                    return _states;
+
+                return _states = new StateRepository(_context);
             }
         }
 
