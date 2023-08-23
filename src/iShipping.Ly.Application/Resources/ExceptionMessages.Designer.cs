@@ -61,11 +61,65 @@ namespace iShipping.Ly.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to العنوان موجود بالفعل.
+        /// </summary>
+        public static string AddressAlreadyExist {
+            get {
+                return ResourceManager.GetString("AddressAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to العنوان غير موجود.
+        /// </summary>
+        public static string AddressNotFound {
+            get {
+                return ResourceManager.GetString("AddressNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المدينة موجودة بالفعل.
+        /// </summary>
+        public static string CityAlreadyExist {
+            get {
+                return ResourceManager.GetString("CityAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المدينة غير موجودة.
+        /// </summary>
+        public static string CityNotFound {
+            get {
+                return ResourceManager.GetString("CityNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to لا يوجد مستخدمين.
         /// </summary>
         public static string EmptyUsersResponse {
             get {
                 return ResourceManager.GetString("EmptyUsersResponse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المقاطعة موجودة بالفعل.
+        /// </summary>
+        public static string StateAlreadyExist {
+            get {
+                return ResourceManager.GetString("StateAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المقاطعة غير موجودة.
+        /// </summary>
+        public static string StateNotFound {
+            get {
+                return ResourceManager.GetString("StateNotFound", resourceCulture);
             }
         }
         

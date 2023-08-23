@@ -117,8 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AddressAlreadyExist" xml:space="preserve">
+    <value>العنوان موجود بالفعل</value>
+  </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>العنوان غير موجود</value>
+  </data>
+  <data name="CityAlreadyExist" xml:space="preserve">
+    <value>المدينة موجودة بالفعل</value>
+  </data>
+  <data name="CityNotFound" xml:space="preserve">
+    <value>المدينة غير موجودة</value>
+  </data>
   <data name="EmptyUsersResponse" xml:space="preserve">
     <value>لا يوجد مستخدمين</value>
+  </data>
+  <data name="StateAlreadyExist" xml:space="preserve">
+    <value>المقاطعة موجودة بالفعل</value>
+  </data>
+  <data name="StateNotFound" xml:space="preserve">
+    <value>المقاطعة غير موجودة</value>
   </data>
   <data name="UserAlreadyExist" xml:space="preserve">
     <value>المستخدم موجود بالفعل</value>
