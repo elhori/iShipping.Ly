@@ -138,6 +138,18 @@
   <data name="EmptyUsersResponse" xml:space="preserve">
     <value>لا يوجد مستخدمين</value>
   </data>
+  <data name="PurchaseOrderAlreadyExist" xml:space="preserve">
+    <value>الطلب موجود بالفعل</value>
+  </data>
+  <data name="PurchaseOrderItemAlreadyExist" xml:space="preserve">
+    <value>المنتج مسجل بالفعل</value>
+  </data>
+  <data name="PurchaseOrderItemNotFound" xml:space="preserve">
+    <value>المنتج غير موجود</value>
+  </data>
+  <data name="PurchaseOrderNotFound" xml:space="preserve">
+    <value>الطلب غير موجود</value>
+  </data>
   <data name="StateAlreadyExist" xml:space="preserve">
     <value>المقاطعة موجودة بالفعل</value>
   </data>

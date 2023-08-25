@@ -12,6 +12,10 @@
 
         ICountryRepository Countries { get; }
 
+        IPurchaseOrderRepository PurchaseOrders { get; }
+
+        IPurchaseOrderItemRepository PurchaseOrderItems { get; }
+
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
 
         Task BeginTransactionAsync();

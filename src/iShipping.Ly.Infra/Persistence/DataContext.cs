@@ -13,6 +13,8 @@ namespace iShipping.Ly.Infra.Persistence
         public DbSet<Address> Addresses { get; set; } = null!;
         public DbSet<City> Cities { get; set; } = null!;
         public DbSet<State> States { get; set; } = null!;
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; } = null!;
+        public DbSet<PurchaseOrderItem> PurchaseOrderItems { get; set; } = null!;
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

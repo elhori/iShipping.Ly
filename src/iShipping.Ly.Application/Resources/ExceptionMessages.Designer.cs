@@ -124,6 +124,42 @@ namespace iShipping.Ly.Application.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to الطلب موجود بالفعل.
+        /// </summary>
+        public static string PurchaseOrderAlreadyExist {
+            get {
+                return ResourceManager.GetString("PurchaseOrderAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المنتج مسجل بالفعل.
+        /// </summary>
+        public static string PurchaseOrderItemAlreadyExist {
+            get {
+                return ResourceManager.GetString("PurchaseOrderItemAlreadyExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to المنتج غير موجود.
+        /// </summary>
+        public static string PurchaseOrderItemNotFound {
+            get {
+                return ResourceManager.GetString("PurchaseOrderItemNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to الطلب غير موجود.
+        /// </summary>
+        public static string PurchaseOrderNotFound {
+            get {
+                return ResourceManager.GetString("PurchaseOrderNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to المقاطعة موجودة بالفعل.
         /// </summary>
         public static string StateAlreadyExist {

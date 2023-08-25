@@ -1,4 +1,5 @@
 ﻿using iShipping.Ly.Application.Dtos.Identity;
+using iShipping.Ly.Domain.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace iShipping.Ly.Infra.Identity
@@ -36,6 +37,9 @@ namespace iShipping.Ly.Infra.Identity
         public string LastName { get; private set; } = string.Empty;
 
         public string? IdentificationCardNumber { get; private set; } = string.Empty;
+
+        private readonly HashSet<PurchaseOrder> _orders = new();
+        public IReadOnlyCollection<PurchaseOrder> Orders => _orders;
 
         public void UpdateProfile(UpdateUserProfileRequest request)
         {

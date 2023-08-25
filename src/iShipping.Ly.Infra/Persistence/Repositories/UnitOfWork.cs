@@ -78,6 +78,30 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             }
         }
 
+        private IPurchaseOrderRepository _purchaseOrders;
+        public IPurchaseOrderRepository PurchaseOrders
+        {
+            get
+            {
+                if (_purchaseOrders != null)
+                    return _purchaseOrders;
+
+                return _purchaseOrders = new PurchaseOrderRepository(_context);
+            }
+        }
+
+        private IPurchaseOrderItemRepository _purchaseOrderItems;
+        public IPurchaseOrderItemRepository PurchaseOrderItems
+        {
+            get
+            {
+                if (_purchaseOrderItems != null)
+                    return _purchaseOrderItems;
+
+                return _purchaseOrderItems = new PurchaseOrderItemRepository(_context);
+            }
+        }
+
         public async Task BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
 
         public async Task CommitTransactionAsync() => await _context.Database.CommitTransactionAsync();

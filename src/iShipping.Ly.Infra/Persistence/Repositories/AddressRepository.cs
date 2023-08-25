@@ -21,7 +21,7 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
 
             var skip = request.PageSize * (request.CurrentPage - 1);
 
-            var totalResults = await data.CountAsync();
+            var totalResults = await data.CountAsync(cancellationToken);
 
             var results = await data
                 .OrderBy(i => i.Id)
