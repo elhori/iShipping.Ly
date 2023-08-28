@@ -35,6 +35,9 @@ namespace iShipping.Ly.Domain.Entities
 
         public string TrackingNumber { get; private set; } = string.Empty;
 
+        public int PurchaseOrderId { get; private set; }
+        public PurchaseOrder PurchaseOrder { get; private set; } = null!;
+
         public void GenerateTrackingNumber()
         {
             TrackingNumber = Guid.NewGuid().ToString("N").Substring(0, 10);

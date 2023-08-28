@@ -1,5 +1,7 @@
-﻿using iShipping.Ly.Infra.Identity;
+﻿using iShipping.Ly.Application.Contracts.Repositories;
+using iShipping.Ly.Infra.Identity;
 using iShipping.Ly.Infra.Persistence;
+using iShipping.Ly.Infra.Persistence.Repositories;
 using iShipping.Ly.Infra.Persistence.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -16,7 +18,7 @@ namespace iShipping.Ly.Infra
         {
             services.AddDbContext<DataContext>();
 
-            // TODO: Register IUnitOfWork
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

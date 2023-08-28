@@ -22,7 +22,8 @@ namespace iShipping.Ly.Application.Extensions
                 Price: request.Price,
                 ShippingPriceInDollar: request.ShippingPriceInDollar,
                 ColorAndSize: request.ColorAndSize,
-                Note: request.Note);
+                Note: request.Note,
+                PurchaseOrderId: request.PurchaseOrderId);
         }
 
         public static PurchaseOrderItemModel ToModel(this UpdatePurchaseOrderItemRequest request)
@@ -33,7 +34,8 @@ namespace iShipping.Ly.Application.Extensions
                 Price: request.Price,
                 ShippingPriceInDollar: request.ShippingPriceInDollar,
                 ColorAndSize: request.ColorAndSize,
-                Note: request.Note);
+                Note: request.Note,
+                PurchaseOrderId: request.PurchaseOrderId);
         }
 
         public static GetPurchaseOrderItemsResponse ToResponse(this PurchaseOrderItem purchaseOrderItem)

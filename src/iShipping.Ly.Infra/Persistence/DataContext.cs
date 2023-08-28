@@ -27,7 +27,7 @@ namespace iShipping.Ly.Infra.Persistence
         {
             base.OnConfiguring(optionsBuilder);
 
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=iShippingLyDb;Trusted_Connection=True;MultipleActiveResultSets=true");
+            optionsBuilder.UseSqlServer("Server=tcp:ishipping.database.windows.net,1433;Initial Catalog=ishippingdb;Persist Security Info=False;User ID=Elhori;Password=Admin@22;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
         }
     }
 }

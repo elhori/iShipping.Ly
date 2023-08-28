@@ -7,5 +7,6 @@
         decimal Price,
         decimal ShippingPriceInDollar,
         string ColorAndSize,
-        string Note);
+        string Note,
+        int PurchaseOrderId);
 }

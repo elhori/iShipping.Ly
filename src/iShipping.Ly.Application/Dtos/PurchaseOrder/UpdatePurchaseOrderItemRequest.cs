@@ -9,5 +9,6 @@ namespace iShipping.Ly.Application.Dtos.PurchaseOrder
         decimal Price,
         decimal ShippingPriceInDollar,
         string ColorAndSize,
-        string Note) : IRequest<GetPurchaseOrderItemsResponse>;
+        string Note,
+        int PurchaseOrderId) : IRequest<GetPurchaseOrderItemsResponse>;
 }
