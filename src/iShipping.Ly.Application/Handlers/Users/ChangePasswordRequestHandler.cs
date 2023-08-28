@@ -1,4 +1,4 @@
-﻿using iShipping.Ly.Application.Contracts.Repositories;
+﻿using iShipping.Ly.Application.Contracts.Services;
 using iShipping.Ly.Application.Dtos.Identity;
 using MediatR;
 
@@ -6,14 +6,14 @@ namespace iShipping.Ly.Application.Handlers.Users
 {
     public class ChangePasswordRequestHandler : IRequestHandler<ChangePasswordRequest, Result>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public ChangePasswordRequestHandler(IUnitOfWork unitOfWork)
+        public ChangePasswordRequestHandler(IUserService userService)
         {
-            _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task<Result> Handle(ChangePasswordRequest request, CancellationToken cancellationToken)
-            => await _unitOfWork.Users.ChangePasswordAsync(request);
+            => await _userService.ChangePasswordAsync(request);
     }
 }

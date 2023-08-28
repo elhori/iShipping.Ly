@@ -1,5 +1,5 @@
 ﻿using iShipping.Ly.Application.Constants;
-using iShipping.Ly.Application.Contracts.Repositories;
+using iShipping.Ly.Application.Contracts.Services;
 using iShipping.Ly.Application.Dtos;
 using iShipping.Ly.Application.Dtos.Identity;
 using iShipping.Ly.Application.Resources;
@@ -13,14 +13,14 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
-namespace iShipping.Ly.Infra.Persistence.Repositories
+namespace iShipping.Ly.Infra.Persistence.Services
 {
-    public class UserRepository : IUserRepository
+    public class UserService : IUserService
     {
-        private readonly UserManager<AppUser> _userManager;
         private readonly IConfiguration _config;
+        private readonly UserManager<AppUser> _userManager;
 
-        public UserRepository(UserManager<AppUser> userManager, IConfiguration config)
+        public UserService(IConfiguration config, UserManager<AppUser> userManager)
         {
             _config = config;
             _userManager = userManager;
@@ -274,5 +274,6 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
 
             return IdentityResult.Success.ToApplicationResult();
         }
+
     }
 }

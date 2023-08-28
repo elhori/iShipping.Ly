@@ -1,8 +1,10 @@
 ﻿using iShipping.Ly.Application.Contracts.Repositories;
+using iShipping.Ly.Application.Contracts.Services;
 using iShipping.Ly.Infra.Identity;
 using iShipping.Ly.Infra.Persistence;
 using iShipping.Ly.Infra.Persistence.Repositories;
 using iShipping.Ly.Infra.Persistence.Seed;
+using iShipping.Ly.Infra.Persistence.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -20,6 +22,7 @@ namespace iShipping.Ly.Infra
             services.AddDbContext<DataContext>(o => o.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserService, UserService>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

@@ -2,8 +2,6 @@
 {
     public interface IUnitOfWork
     {
-        IUserRepository Users { get; }
-
         IAddressRepository Addresses { get; }
 
         ICityRepository Cities { get; }

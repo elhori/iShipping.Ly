@@ -1,9 +1,9 @@
 ﻿using iShipping.Ly.Application.Dtos;
 using iShipping.Ly.Application.Dtos.Identity;
 
-namespace iShipping.Ly.Application.Contracts.Repositories
+namespace iShipping.Ly.Application.Contracts.Services
 {
-    public interface IUserRepository
+    public interface IUserService
     {
         Task<(Result, object)> AuthenticateAsync(LoginRequest model, CancellationToken cancellationToken);
         Task<Result> RegisterAsync(RegisterRequest model);

@@ -1,4 +1,4 @@
-﻿using iShipping.Ly.Application.Contracts.Repositories;
+﻿using iShipping.Ly.Application.Contracts.Services;
 using iShipping.Ly.Application.Dtos.Identity;
 using MediatR;
 
@@ -6,14 +6,14 @@ namespace iShipping.Ly.Application.Handlers.Users
 {
     public class GetUserRequestHandler : IRequestHandler<GetUserRequest, GetUsersResponse>
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly IUserService _userService;
 
-        public GetUserRequestHandler(IUnitOfWork unitOfWork)
+        public GetUserRequestHandler(IUserService userService)
         {
-            _unitOfWork = unitOfWork;
+            _userService = userService;
         }
 
         public async Task<GetUsersResponse> Handle(GetUserRequest request, CancellationToken cancellationToken)
-            => await _unitOfWork.Users.GetUserAsync(request.userId, cancellationToken);
+            => await _userService.GetUserAsync(request.userId, cancellationToken);
     }
 }
