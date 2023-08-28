@@ -1,5 +1,6 @@
 using iShipping.Ly.Application;
 using iShipping.Ly.Infra;
+using iShipping.Ly.Infra.Persistence.Seed;
 
 namespace iShipping.Ly.API
 {
@@ -27,12 +28,19 @@ namespace iShipping.Ly.API
                 app.UseSwaggerUI();
             }
 
+            //TODO: Remove Swagger UI from Production
+            app.UseSwagger();
+            app.UseSwaggerUI();
+
+            app.UseCors(builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+
             app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
-
             app.MapControllers();
+
+            DataSeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 
             app.Run();
         }

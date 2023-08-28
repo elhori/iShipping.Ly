@@ -22,12 +22,5 @@ namespace iShipping.Ly.Infra.Persistence
 
             builder.ApplyConfigurationsFromAssembly(typeof(DataContext).Assembly);
         }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-
-            optionsBuilder.UseSqlServer("Server=tcp:ishipping.database.windows.net,1433;Initial Catalog=ishippingdb;Persist Security Info=False;User ID=Elhori;Password=Admin@22;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30");
-        }
     }
 }

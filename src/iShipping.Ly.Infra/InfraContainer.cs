@@ -5,6 +5,7 @@ using iShipping.Ly.Infra.Persistence.Repositories;
 using iShipping.Ly.Infra.Persistence.Seed;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -16,7 +17,7 @@ namespace iShipping.Ly.Infra
     {
         public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<DataContext>();
+            services.AddDbContext<DataContext>(o => o.UseSqlServer(config.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
