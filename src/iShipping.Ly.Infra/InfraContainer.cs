@@ -3,6 +3,7 @@ using iShipping.Ly.Application.Contracts.Services;
 using iShipping.Ly.Infra.Identity;
 using iShipping.Ly.Infra.Persistence;
 using iShipping.Ly.Infra.Persistence.Repositories;
+using iShipping.Ly.Infra.Persistence.Seed;
 using iShipping.Ly.Infra.Persistence.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
@@ -54,7 +55,7 @@ namespace iShipping.Ly.Infra
 
             services.AddAuthorization();
 
-            //DataSeeder.SeedAsync(services.BuildServiceProvider()).GetAwaiter().GetResult();
+            DataSeeder.SeedAsync(services.BuildServiceProvider()).GetAwaiter().GetResult();
 
             return services;
         }

@@ -2,6 +2,7 @@ using FluentValidation;
 using iShipping.Ly.Application;
 using iShipping.Ly.Infra;
 using iShipping.Ly.Infra.Persistence;
+using iShipping.Ly.Infra.Persistence.Seed;
 using Microsoft.EntityFrameworkCore;
 
 namespace iShipping.Ly.API
@@ -53,7 +54,7 @@ namespace iShipping.Ly.API
                 context.Database.Migrate();
             }
 
-            //DataSeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
+            DataSeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 
             app.Run();
         }
