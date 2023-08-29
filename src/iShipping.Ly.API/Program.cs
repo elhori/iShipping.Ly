@@ -1,6 +1,8 @@
+using FluentValidation;
 using iShipping.Ly.Application;
 using iShipping.Ly.Infra;
-using iShipping.Ly.Infra.Persistence.Seed;
+using iShipping.Ly.Infra.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 namespace iShipping.Ly.API
 {
@@ -14,10 +16,12 @@ namespace iShipping.Ly.API
             builder.Services.AddApplication();
             builder.Services.AddInfra(builder.Configuration);
 
+            builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
-            builder.Services.AddSwaggerGen();
+            builder.Services.RegisterSwaggerServices();
 
             var app = builder.Build();
 
@@ -40,7 +44,16 @@ namespace iShipping.Ly.API
 
             app.MapControllers();
 
-            DataSeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
+            using (var scope = app.Services.CreateScope())
+            {
+                var services = scope.ServiceProvider;
+
+                var context = services.GetRequiredService<DataContext>();
+
+                context.Database.Migrate();
+            }
+
+            //DataSeeder.SeedAsync(app.Services).GetAwaiter().GetResult();
 
             app.Run();
         }

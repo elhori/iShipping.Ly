@@ -3,11 +3,9 @@ using iShipping.Ly.Application.Contracts.Services;
 using iShipping.Ly.Infra.Identity;
 using iShipping.Ly.Infra.Persistence;
 using iShipping.Ly.Infra.Persistence.Repositories;
-using iShipping.Ly.Infra.Persistence.Seed;
 using iShipping.Ly.Infra.Persistence.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
@@ -19,7 +17,7 @@ namespace iShipping.Ly.Infra
     {
         public static IServiceCollection AddInfra(this IServiceCollection services, IConfiguration config)
         {
-            services.AddDbContext<DataContext>(o => o.UseSqlServer(config.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<DataContext>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
@@ -56,7 +54,7 @@ namespace iShipping.Ly.Infra
 
             services.AddAuthorization();
 
-            DataSeeder.SeedAsync(services.BuildServiceProvider()).GetAwaiter().GetResult();
+            //DataSeeder.SeedAsync(services.BuildServiceProvider()).GetAwaiter().GetResult();
 
             return services;
         }
