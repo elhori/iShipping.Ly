@@ -45,7 +45,8 @@ namespace iShipping.Ly.Application.Extensions
                 AddressLineTwo = address.AddressLineTwo,
                 ZipCode = address.ZipCode,
                 Phone = address.Phone,
-                CityId = address.CityId
+                CityId = address.CityId,
+                CountryId = address.CountryId
             };
         }
     }

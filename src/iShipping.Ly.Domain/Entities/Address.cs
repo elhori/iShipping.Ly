@@ -46,8 +46,8 @@ namespace iShipping.Ly.Domain.Entities
             AddressLineTwo = model.AddressLineTwo;
             ZipCode = model.ZipCode;
             Phone = model.Phone;
-            CityId = model.CityId;
-            CountryId = model.CountryId;
+            CityId = model.CityId != 0 ? model.CityId : CityId;
+            CountryId = model.CountryId != 0 ? model.CountryId : CountryId;
         }
     }
 }

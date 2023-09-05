@@ -40,6 +40,8 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
                     CityName = i.City.Name,
                     StateId = i.City.State.Id,
                     StateName = i.City.State.Name,
+                    CountryId = i.CountryId,
+                    CountryName = i.Country.Name
 
                 }).ToListAsync(cancellationToken);
 

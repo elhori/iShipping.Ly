@@ -128,8 +128,8 @@ namespace iShipping.Ly.API.Controllers
         public async Task<ActionResult<Response<GetUsersResponse>>> SearchUsers([FromQuery] SearchUsersRequest request)
             => Ok(await _mediator.Send(request));
 
-        [HttpPost("ChangePassword")]
-        public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordRequest request, [FromQuery] string? userId)
+        [HttpPost("ChangePassword/{userId}")]
+        public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordRequest request, string? userId)
         {
             string id = string.Empty;
 

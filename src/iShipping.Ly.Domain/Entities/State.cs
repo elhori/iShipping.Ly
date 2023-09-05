@@ -9,6 +9,7 @@ namespace iShipping.Ly.Domain.Entities
         public State(StateModel model)
         {
             Name = model.Name;
+            CountryId = model.CountryId;
         }
 
         public int Id { get; private set; }
@@ -24,6 +25,7 @@ namespace iShipping.Ly.Domain.Entities
         public void Update(StateModel model)
         {
             Name = model.Name;
+            CountryId = model.CountryId != 0 ? model.CountryId : CountryId;
         }
     }
 }

@@ -9,6 +9,7 @@ namespace iShipping.Ly.Domain.Entities
         public City(CityModel model)
         {
             Name = model.Name;
+            StateId = model.StateId;
         }
 
         public int Id { get; private set; }
@@ -24,6 +25,7 @@ namespace iShipping.Ly.Domain.Entities
         public void Update(CityModel model)
         {
             Name = model.Name;
+            StateId = model.StateId! != 0 ? model.StateId : StateId;
         }
     }
 }

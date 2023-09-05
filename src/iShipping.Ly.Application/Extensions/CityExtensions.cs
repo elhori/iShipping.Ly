@@ -8,12 +8,12 @@ namespace iShipping.Ly.Application.Extensions
     {
         public static CityModel ToModel(this CreateCityRequest request)
         {
-            return new CityModel(Id: 0, Name: request.Name);
+            return new CityModel(Id: 0, Name: request.Name, StateId: request.StateId);
         }
 
         public static CityModel ToModel(this UpdateCityRequest request)
         {
-            return new CityModel(Id: request.Id, Name: request.Name);
+            return new CityModel(Id: request.Id, Name: request.Name, StateId: (int)request.StateId!);
         }
 
         public static GetCitiesResponse ToResponse(this City city)

@@ -8,12 +8,12 @@ namespace iShipping.Ly.Application.Extensions
     {
         public static StateModel ToModel(this CreateStateRequest request)
         {
-            return new StateModel(Id: 0, Name: request.Name);
+            return new StateModel(Id: 0, Name: request.Name, CountryId: request.CountryId);
         }
 
         public static StateModel ToModel(this UpdateStateRequest request)
         {
-            return new StateModel(Id: request.Id, Name: request.Name);
+            return new StateModel(Id: request.Id, Name: request.Name, CountryId: request.CountryId);
         }
 
         public static GetStatesResponse ToResponse(this State state)
@@ -21,7 +21,8 @@ namespace iShipping.Ly.Application.Extensions
             return new GetStatesResponse
             {
                 Id = state.Id,
-                Name = state.Name
+                Name = state.Name,
+                CountryId = state.CountryId
             };
         }
     }

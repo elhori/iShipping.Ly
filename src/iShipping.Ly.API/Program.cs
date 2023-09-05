@@ -41,6 +41,8 @@ namespace iShipping.Ly.API
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
+
             app.UseAuthorization();
 
             app.MapControllers();
