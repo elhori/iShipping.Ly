@@ -10,11 +10,13 @@ namespace iShipping.Ly.Infra.Persistence.Configurations
         {
             builder.HasOne(i => i.City)
                 .WithMany(i => i.Addresses)
-                .HasForeignKey(i => i.CityId);
+                .HasForeignKey(i => i.CityId)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.HasOne(i => i.Country)
                 .WithMany(i => i.Addresses)
-                .HasForeignKey(i => i.CountryId);
+                .HasForeignKey(i => i.CountryId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

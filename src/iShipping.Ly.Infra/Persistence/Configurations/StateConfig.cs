@@ -14,7 +14,8 @@ namespace iShipping.Ly.Infra.Persistence.Configurations
 
             builder.HasOne(i => i.Country)
                 .WithMany(i => i.States)
-                .HasForeignKey(i => i.CountryId);
+                .HasForeignKey(i => i.CountryId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

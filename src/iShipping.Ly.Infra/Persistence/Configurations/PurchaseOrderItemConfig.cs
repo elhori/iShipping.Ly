@@ -10,7 +10,8 @@ namespace iShipping.Ly.Infra.Persistence.Configurations
         {
             builder.HasOne(i => i.PurchaseOrder)
                 .WithMany(i => i.Items)
-                .HasForeignKey(i => i.PurchaseOrderId);
+                .HasForeignKey(i => i.PurchaseOrderId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

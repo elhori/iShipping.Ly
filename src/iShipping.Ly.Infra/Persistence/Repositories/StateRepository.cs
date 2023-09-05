@@ -30,7 +30,9 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
                 .Select(i => new GetStatesResponse
                 {
                     Id = i.Id,
-                    Name = i.Name
+                    Name = i.Name,
+                    CountryId = i.CountryId,
+                    CountryName = i.Country.Name
 
                 }).ToListAsync(cancellationToken);
 
