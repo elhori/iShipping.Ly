@@ -15,6 +15,9 @@ namespace iShipping.Ly.Domain.Entities
 
         public string Name { get; private set; } = string.Empty;
 
+        public int CountryId { get; private set; }
+        public Country Country { get; private set; } = null!;
+
         private readonly HashSet<City> _cities = new();
         public IReadOnlyCollection<City> Cities => _cities;
 

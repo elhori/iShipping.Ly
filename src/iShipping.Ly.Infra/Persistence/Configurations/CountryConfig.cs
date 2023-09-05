@@ -11,6 +11,10 @@ namespace iShipping.Ly.Infra.Persistence.Configurations
             builder.HasMany(i => i.Addresses)
                 .WithOne(i => i.Country)
                 .HasForeignKey(i => i.CountryId);
+
+            builder.HasMany(i => i.States)
+                .WithOne(i => i.Country)
+                .HasForeignKey(i => i.CountryId);
         }
     }
 }

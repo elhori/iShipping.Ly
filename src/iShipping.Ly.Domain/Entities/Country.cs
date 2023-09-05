@@ -17,6 +17,9 @@ namespace iShipping.Ly.Domain.Entities
         private readonly HashSet<Address> _addresses = new();
         public IReadOnlyCollection<Address> Addresses => _addresses;
 
+        private readonly HashSet<State> _states = new();
+        public IReadOnlyCollection<State> States => _states;
+
         public void Update(CountryModel model)
         {
             Name = model.Name;
