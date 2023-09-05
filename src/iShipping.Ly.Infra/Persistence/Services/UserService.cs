@@ -119,7 +119,7 @@ namespace iShipping.Ly.Infra.Persistence.Services
             if (!result.Succeeded)
                 return IdentityResult.Failed().ToApplicationResult();
 
-            var roleResult = await _userManager.AddToRoleAsync(user, request.Role.ToString());
+            var roleResult = await _userManager.AddToRoleAsync(user, nameof(Roles.SuperAdmin));
 
             if (!roleResult.Succeeded)
                 return IdentityResult.Failed().ToApplicationResult();
@@ -197,7 +197,7 @@ namespace iShipping.Ly.Infra.Persistence.Services
             if (!result.Succeeded)
                 return IdentityResult.Failed().ToApplicationResult();
 
-            var roleResult = await _userManager.AddToRoleAsync(user, model.Role.ToString());
+            var roleResult = await _userManager.AddToRoleAsync(user, nameof(Roles.Customer));
 
             if (!roleResult.Succeeded)
                 return IdentityResult.Failed().ToApplicationResult();

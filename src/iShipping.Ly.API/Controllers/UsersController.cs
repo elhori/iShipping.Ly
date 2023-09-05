@@ -59,8 +59,8 @@ namespace iShipping.Ly.API.Controllers
             return BadRequest(result.Errors);
         }
 
-        [HttpPut("UpdateUserProfile")]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileRequest request, [FromQuery] string? userId)
+        [HttpPut("UpdateUserProfile/{userId}")]
+        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileRequest request, string? userId)
         {
             string id = string.Empty;
 
