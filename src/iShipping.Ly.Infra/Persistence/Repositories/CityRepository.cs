@@ -31,9 +31,7 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
                 {
                     Id = i.Id,
                     Name = i.Name,
-                    AddressId = i.AddressId,
-                    Address = $"{i.Address.City.Name} - {i.Address.City.StateId}",
-                    StateId = i.StateId,
+                    StateId = (int)i.StateId!,
                     StateName = i.State.Name
 
                 }).ToListAsync(cancellationToken);

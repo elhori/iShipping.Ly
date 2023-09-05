@@ -12,7 +12,7 @@ using iShipping.Ly.Infra.Persistence;
 namespace iShipping.Ly.Infra.Persistence.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230829001207_init")]
+    [Migration("20230902030720_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -84,7 +84,7 @@ namespace iShipping.Ly.Infra.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("StateId")
+                    b.Property<int?>("StateId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

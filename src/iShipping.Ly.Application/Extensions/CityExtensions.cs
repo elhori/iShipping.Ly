@@ -8,12 +8,12 @@ namespace iShipping.Ly.Application.Extensions
     {
         public static CityModel ToModel(this CreateCityRequest request)
         {
-            return new CityModel(Id: 0, Name: request.Name, AddressId: request.AddressId);
+            return new CityModel(Id: 0, Name: request.Name);
         }
 
         public static CityModel ToModel(this UpdateCityRequest request)
         {
-            return new CityModel(Id: request.Id, Name: request.Name, AddressId: request.AddressId);
+            return new CityModel(Id: request.Id, Name: request.Name);
         }
 
         public static GetCitiesResponse ToResponse(this City city)
@@ -22,8 +22,7 @@ namespace iShipping.Ly.Application.Extensions
             {
                 Id = city.Id,
                 Name = city.Name,
-                AddressId = city.AddressId,
-                StateId = city.StateId
+                StateId = (int)city.StateId!
             };
         }
     }

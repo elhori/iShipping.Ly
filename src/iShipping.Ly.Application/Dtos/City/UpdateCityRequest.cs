@@ -2,5 +2,5 @@
 
 namespace iShipping.Ly.Application.Dtos.City
 {
-    public record UpdateCityRequest(int Id, string Name, int AddressId, int StateId) : IRequest<GetCitiesResponse>;
+    public record UpdateCityRequest(int Id, string Name, int? StateId) : IRequest<GetCitiesResponse>;
 }

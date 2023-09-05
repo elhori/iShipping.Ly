@@ -9,20 +9,18 @@ namespace iShipping.Ly.Domain.Entities
         public State(StateModel model)
         {
             Name = model.Name;
-            CityId = model.CityId;
         }
 
         public int Id { get; private set; }
 
         public string Name { get; private set; } = string.Empty;
 
-        public int CityId { get; private set; }
-        public City City { get; private set; } = null!;
+        private readonly HashSet<City> _cities = new();
+        public IReadOnlyCollection<City> Cities => _cities;
 
         public void Update(StateModel model)
         {
             Name = model.Name;
-            CityId = model.CityId;
         }
     }
 }

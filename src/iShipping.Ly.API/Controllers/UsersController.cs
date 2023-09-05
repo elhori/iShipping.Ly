@@ -45,7 +45,8 @@ namespace iShipping.Ly.API.Controllers
 
         [HttpPost]
         [Route("RegisterAdminAccount")]
-        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        //[Authorize(Roles = nameof(Roles.SuperAdmin))]
+        [AllowAnonymous]
         public async Task<IActionResult> RegisterAdmin([FromBody] CreateAdminRequest request)
         {
             var result = await _mediator.Send(request);
@@ -97,7 +98,8 @@ namespace iShipping.Ly.API.Controllers
 
         [HttpPost]
         [Route("RemoveAccount")]
-        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        //[Authorize(Roles = nameof(Roles.SuperAdmin))]
+        [AllowAnonymous]
         public async Task<IActionResult> Remove([FromBody] DeleteUserRequest request)
         {
             var result = await _mediator.Send(request);
@@ -109,17 +111,20 @@ namespace iShipping.Ly.API.Controllers
         }
 
         [HttpGet("GetUser/{userId}")]
-        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        //[Authorize(Roles = nameof(Roles.SuperAdmin))]
+        [AllowAnonymous]
         public async Task<ActionResult<GetUsersResponse>> GetUser(string userId)
             => Ok(await _mediator.Send(new GetUserRequest(userId: userId)));
 
         [HttpGet("GetUsers")]
-        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        //[Authorize(Roles = nameof(Roles.SuperAdmin))]
+        [AllowAnonymous]
         public async Task<ActionResult<Response<GetUsersResponse>>> GetUsers([FromQuery] GetUsersRequest request)
             => Ok(await _mediator.Send(request));
 
         [HttpGet("SearchUsers")]
-        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        //[Authorize(Roles = nameof(Roles.SuperAdmin))]
+        [AllowAnonymous]
         public async Task<ActionResult<Response<GetUsersResponse>>> SearchUsers([FromQuery] SearchUsersRequest request)
             => Ok(await _mediator.Send(request));
 
@@ -157,7 +162,8 @@ namespace iShipping.Ly.API.Controllers
         }
 
         [HttpPost("ResetPassword")]
-        [Authorize(Roles = nameof(Roles.SuperAdmin))]
+        //[Authorize(Roles = nameof(Roles.SuperAdmin))]
+        [AllowAnonymous]
         public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
         {
             var result = await _mediator.Send(request);

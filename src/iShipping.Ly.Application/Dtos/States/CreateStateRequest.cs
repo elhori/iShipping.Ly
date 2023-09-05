@@ -2,5 +2,5 @@
 
 namespace iShipping.Ly.Application.Dtos.States
 {
-    public record CreateStateRequest(string Name, int CityId) : IRequest<GetStatesResponse>;
+    public record CreateStateRequest(string Name) : IRequest<GetStatesResponse>;
 }

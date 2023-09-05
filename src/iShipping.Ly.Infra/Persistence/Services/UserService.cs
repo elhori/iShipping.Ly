@@ -19,25 +19,47 @@ namespace iShipping.Ly.Infra.Persistence.Services
     {
         private readonly IConfiguration _config;
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public UserService(IConfiguration config, UserManager<AppUser> userManager)
+        public UserService(IConfiguration config, UserManager<AppUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _config = config;
             _userManager = userManager;
+            _roleManager = roleManager;
+
         }
 
         public async Task<(Result, object)> AuthenticateAsync(LoginRequest model, CancellationToken cancellationToken = default)
         {
-            var user = await _userManager.Users.FirstAsync(u => u.PhoneNumber == model.PhoneNumber, cancellationToken);
+            var user = await _userManager.Users.FirstAsync(u => u.PhoneNumber == model.PhoneNumber);
 
             if (user != null && await _userManager.CheckPasswordAsync(user, model.Password))
             {
+                var userRoles = await _userManager.GetRolesAsync(user);
+
                 var authClaims = new List<Claim>
                 {
                     new Claim(ClaimTypes.NameIdentifier, user.Id),
                     new Claim(ClaimTypes.Name, user.UserName),
                     new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
+
+                foreach (var userRole in userRoles)
+                {
+                    authClaims.Add(new Claim(ClaimTypes.Role, userRole));
+
+                    var role = await _roleManager.FindByNameAsync(userRole);
+
+                    if (role != null)
+                    {
+                        var roleClaims = await _roleManager.GetClaimsAsync(role);
+
+                        foreach (Claim roleClaim in roleClaims)
+                        {
+                            authClaims.Add(roleClaim);
+                        }
+                    }
+                }
 
                 var authSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config["JWT:Secret"]));
 
@@ -53,6 +75,7 @@ namespace iShipping.Ly.Infra.Persistence.Services
                     id = $"{user.Id}",
                     username = $"{user.UserName}",
                     fullname = $"{user.FirstName} {user.LastName}",
+                    role = string.Join(", ", userRoles),
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo
                 });

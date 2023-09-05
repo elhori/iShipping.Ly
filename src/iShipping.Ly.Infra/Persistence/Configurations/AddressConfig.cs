@@ -9,8 +9,8 @@ namespace iShipping.Ly.Infra.Persistence.Configurations
         public void Configure(EntityTypeBuilder<Address> builder)
         {
             builder.HasOne(i => i.City)
-                .WithOne(i => i.Address)
-                .HasForeignKey<Address>(i => i.CityId);
+                .WithMany(i => i.Addresses)
+                .HasForeignKey(i => i.CityId);
 
             builder.HasOne(i => i.Country)
                 .WithMany(i => i.Addresses)
