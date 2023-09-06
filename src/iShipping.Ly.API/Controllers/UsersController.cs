@@ -21,7 +21,7 @@ namespace iShipping.Ly.API.Controllers
 
         [HttpPost("Login")]
         [AllowAnonymous]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> LoginAsync([FromBody] LoginRequest request)
         {
             var result = await _mediator.Send(request);
 
@@ -31,7 +31,7 @@ namespace iShipping.Ly.API.Controllers
         [HttpPost]
         [Route("RegisterAccount")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
+        public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequest request)
         {
             var result = await _mediator.Send(request);
 
@@ -47,7 +47,7 @@ namespace iShipping.Ly.API.Controllers
         [Route("RegisterAdminAccount")]
         //[Authorize(Roles = nameof(Roles.SuperAdmin))]
         [AllowAnonymous]
-        public async Task<IActionResult> RegisterAdmin([FromBody] CreateAdminRequest request)
+        public async Task<IActionResult> RegisterAdminAsync([FromBody] CreateAdminRequest request)
         {
             var result = await _mediator.Send(request);
 
@@ -60,7 +60,7 @@ namespace iShipping.Ly.API.Controllers
         }
 
         [HttpPut("UpdateUserProfile/{userId}")]
-        public async Task<IActionResult> UpdateUserProfile([FromBody] UpdateUserProfileRequest request, string? userId)
+        public async Task<IActionResult> UpdateUserProfileAsync([FromBody] UpdateUserProfileRequest request, string? userId)
         {
             string id = string.Empty;
 
@@ -100,7 +100,7 @@ namespace iShipping.Ly.API.Controllers
         [Route("RemoveAccount")]
         //[Authorize(Roles = nameof(Roles.SuperAdmin))]
         [AllowAnonymous]
-        public async Task<IActionResult> Remove([FromBody] DeleteUserRequest request)
+        public async Task<IActionResult> RemoveAsync([FromBody] DeleteUserRequest request)
         {
             var result = await _mediator.Send(request);
 
@@ -113,23 +113,23 @@ namespace iShipping.Ly.API.Controllers
         [HttpGet("GetUser/{userId}")]
         //[Authorize(Roles = nameof(Roles.SuperAdmin))]
         [AllowAnonymous]
-        public async Task<ActionResult<GetUsersResponse>> GetUser(string userId)
+        public async Task<ActionResult<GetUsersResponse>> GetUserAsync(string userId)
             => Ok(await _mediator.Send(new GetUserRequest(userId: userId)));
 
         [HttpGet("GetUsers")]
         //[Authorize(Roles = nameof(Roles.SuperAdmin))]
         [AllowAnonymous]
-        public async Task<ActionResult<Response<GetUsersResponse>>> GetUsers([FromQuery] GetUsersRequest request)
+        public async Task<ActionResult<Response<GetUsersResponse>>> GetUsersAsync([FromQuery] GetUsersRequest request)
             => Ok(await _mediator.Send(request));
 
         [HttpGet("SearchUsers")]
         //[Authorize(Roles = nameof(Roles.SuperAdmin))]
         [AllowAnonymous]
-        public async Task<ActionResult<Response<GetUsersResponse>>> SearchUsers([FromQuery] SearchUsersRequest request)
+        public async Task<ActionResult<Response<GetUsersResponse>>> SearchUsersAsync([FromQuery] SearchUsersRequest request)
             => Ok(await _mediator.Send(request));
 
         [HttpPost("ChangePassword/{userId}")]
-        public async Task<ActionResult> ChangePassword([FromBody] ChangePasswordRequest request, string? userId)
+        public async Task<ActionResult> ChangePasswordAsync([FromBody] ChangePasswordRequest request, string? userId)
         {
             string id = string.Empty;
 
@@ -164,7 +164,7 @@ namespace iShipping.Ly.API.Controllers
         [HttpPost("ResetPassword")]
         //[Authorize(Roles = nameof(Roles.SuperAdmin))]
         [AllowAnonymous]
-        public async Task<ActionResult> ResetPassword([FromBody] ResetPasswordRequest request)
+        public async Task<ActionResult> ResetPasswordAsync([FromBody] ResetPasswordRequest request)
         {
             var result = await _mediator.Send(request);
 
