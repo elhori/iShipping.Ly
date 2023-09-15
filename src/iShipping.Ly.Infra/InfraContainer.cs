@@ -22,6 +22,7 @@ namespace iShipping.Ly.Infra
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<ICommitEventService, CommitEventService>();
 
             services.AddIdentity<AppUser, IdentityRole>(options =>
             {

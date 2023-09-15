@@ -21,6 +21,8 @@ namespace iShipping.Ly.Application.Handlers.PurchaseOrders
 
             var purchaseOrderItems = request.Items.Select(item => new PurchaseOrderItem(item.ToModel())).ToList();
 
+            purchaseOrder.CalculateOrderPrice(purchaseOrderItems.Sum(p => p.TotalPrice));
+
             await _unitOfWork.PurchaseOrders.AddAsync(purchaseOrder);
             await _unitOfWork.PurchaseOrderItems.AddRangeAync(purchaseOrderItems);
 

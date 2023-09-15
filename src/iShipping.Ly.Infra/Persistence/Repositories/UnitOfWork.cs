@@ -83,6 +83,30 @@ namespace iShipping.Ly.Infra.Persistence.Repositories
             }
         }
 
+        private IWalletRepository _wallets;
+        public IWalletRepository Wallets
+        {
+            get
+            {
+                if (_wallets != null)
+                    return _wallets;
+
+                return _wallets = new WalletRepository(_context);
+            }
+        }
+
+        private IEventRepository _events;
+        public IEventRepository Events
+        {
+            get
+            {
+                if (_events != null)
+                    return _events;
+
+                return _events = new EventRepository(_context);
+            }
+        }
+
         public async Task BeginTransactionAsync() => await _context.Database.BeginTransactionAsync();
 
         public async Task CommitTransactionAsync() => await _context.Database.CommitTransactionAsync();

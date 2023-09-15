@@ -14,6 +14,10 @@
 
         IPurchaseOrderItemRepository PurchaseOrderItems { get; }
 
+        IWalletRepository Wallets { get; }
+
+        IEventRepository Events { get; }
+
         Task SaveChangesAsync(CancellationToken cancellationToken = default);
 
         Task BeginTransactionAsync();
